@@ -12,7 +12,7 @@ import os
 
 app = Flask(__name__)
 
-print("Starting Medical Chatbot...")
+print("Starting Medical Chatbot...", flush=True)
 load_dotenv()
 
 
@@ -24,14 +24,15 @@ PINECONE_API_KEY = os.getenv("PINECONE_API_KEY")
 
 print("Loading embeddings...")
 embeddings = download_hugging_face_embeddings()
-print("Embeddings loaded.")
+print("Embeddings loaded.", flush=True)
 index_name = "medical-chatbot" 
-print("Connecting to Pinecone...")# Embed each chunk and upsert the embeddings into your Pinecone index.
+print("Connecting to Pinecone...", flush=True)
+# Embed each chunk and upsert the embeddings into your Pinecone index.
 docsearch = PineconeVectorStore.from_existing_index(
     index_name=index_name,
     embedding=embeddings
 )
-print("Connected to Pinecone")
+print("Connected to Pinecone", flush=True)
 
 
 
@@ -51,7 +52,7 @@ prompt = ChatPromptTemplate.from_messages(
 
 question_answer_chain = create_stuff_documents_chain(chatModel, prompt)
 rag_chain = create_retrieval_chain(retriever, question_answer_chain)
-print("RAG initialized")
+print("RAG initialized", flush=True)
 
 @app.route("/")
 def index():
@@ -72,5 +73,5 @@ def chat():
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 8080))
-    print(f"Running on port {port}")
+    print(f"Running on port {port}", flush=True)
     app.run(host="0.0.0.0", port=port, debug=False)
