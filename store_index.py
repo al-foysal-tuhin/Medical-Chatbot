@@ -11,10 +11,6 @@ from src.helper import (
 from pinecone import Pinecone, ServerlessSpec
 from langchain_pinecone import PineconeVectorStore
 
-
-# ==========================
-# Load Environment Variables
-# ==========================
 load_dotenv()
 
 PINECONE_API_KEY = os.getenv("PINECONE_API_KEY")
@@ -22,10 +18,6 @@ PINECONE_API_KEY = os.getenv("PINECONE_API_KEY")
 if not PINECONE_API_KEY:
     raise ValueError("PINECONE_API_KEY not found in .env")
 
-
-# ==========================
-# Load and Process Documents
-# ==========================
 print("Loading PDF files...")
 
 documents = load_pdf_file("data/")
@@ -37,18 +29,10 @@ text_chunks = text_split(documents)
 
 print(f"Created {len(text_chunks)} chunks.")
 
-
-# ==========================
-# Embedding Model
-# ==========================
 print("Loading HuggingFace embeddings...")
 
 embeddings = download_hugging_face_embeddings()
 
-
-# ==========================
-# Pinecone
-# ==========================
 pc = Pinecone(api_key=PINECONE_API_KEY)
 
 index_name = "medical-chatbot"
