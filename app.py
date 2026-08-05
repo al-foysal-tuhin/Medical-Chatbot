@@ -12,31 +12,34 @@ import os
 
 app = Flask(__name__)
 
-
+print("Starting Medical Chatbot...")
 load_dotenv()
 
-PINECONE_API_KEY=os.environ.get('PINECONE_API_KEY')
 
-os.environ["PINECONE_API_KEY"] = PINECONE_API_KEY
+print("Google key exists:", bool(os.environ.get("GOOGLE_API_KEY")))
+print("Pinecone key exists:", bool(os.environ.get("PINECONE_API_KEY")))
 
+GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
+PINECONE_API_KEY = os.getenv("PINECONE_API_KEY")
 
+print("Loading embeddings...")
 embeddings = download_hugging_face_embeddings()
-
+print("Embeddings loaded.")
 index_name = "medical-chatbot" 
-# Embed each chunk and upsert the embeddings into your Pinecone index.
+print("Connecting to Pinecone...")# Embed each chunk and upsert the embeddings into your Pinecone index.
 docsearch = PineconeVectorStore.from_existing_index(
     index_name=index_name,
     embedding=embeddings
 )
-
+print("Connected to Pinecone")
 
 
 
 retriever = docsearch.as_retriever(search_type="similarity", search_kwargs={"k":3})
 
 chatModel = ChatGoogleGenerativeAI(
-    model="gemini-3.1-flash-lite",
-    api_key=os.environ["GOOGLE_API_KEY"],
+    model="gemini-2.5-flash",
+    google_api_key=GOOGLE_API_KEY,
     temperature=0,
 )
 prompt = ChatPromptTemplate.from_messages(
@@ -48,8 +51,7 @@ prompt = ChatPromptTemplate.from_messages(
 
 question_answer_chain = create_stuff_documents_chain(chatModel, prompt)
 rag_chain = create_retrieval_chain(retriever, question_answer_chain)
-
-
+print("RAG initialized")
 
 @app.route("/")
 def index():
@@ -70,4 +72,5 @@ def chat():
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 8080))
+    print(f"Running on port {port}")
     app.run(host="0.0.0.0", port=port, debug=False)
