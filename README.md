@@ -1,130 +1,234 @@
-# Build-a-Complete-Medical-Chatbot-with-LLMs-LangChain-Pinecone-Flask-AWS
+# 🩺 Medical Chatbot using LangChain, Pinecone, Gemini & Flask
 
-# How to run?
-### STEPS:
+A Retrieval-Augmented Generation (RAG) based Medical Chatbot that answers medical questions using a knowledge base built from PDF documents.
+
+The application uses Google's Gemini model for text generation, Pinecone as the vector database, LangChain for orchestration, and Flask for the web interface.
+
+---
+
+## 🚀 Features
+
+- 📄 PDF document ingestion
+- ✂️ Automatic text chunking
+- 🔍 Semantic search using Pinecone
+- 🤖 Google Gemini integration
+- ⚡ Retrieval-Augmented Generation (RAG)
+- 🌐 Flask web interface
+- ☁️ Ready for cloud deployment (Render)
+
+---
+
+## 🛠 Tech Stack
+
+- Python
+- Flask
+- LangChain
+- Google Gemini API
+- Pinecone Vector Database
+- Hugging Face Sentence Transformers
+- PyPDF
+- HTML/CSS
+- Render
+
+---
+
+## 📂 Project Structure
+
+```
+Medical-Chatbot/
+│
+├── app.py
+├── store_index.py
+├── requirements.txt
+├── setup.py
+├── Dockerfile
+│
+├── data/
+│   └── Medical PDFs
+│
+├── src/
+│   ├── helper.py
+│   └── prompt.py
+│
+├── static/
+│   ├── style.css
+│   └── Untitled-design.png
+│
+├── templates/
+│   └── chat.html
+│
+└── README.md
+```
+
+---
+
+# ⚙️ Installation
 
 Clone the repository
 
 ```bash
-git clonehttps://github.com/entbappy/Build-a-Complete-Medical-Chatbot-with-LLMs-LangChain-Pinecone-Flask-AWS.git
+git clone https://github.com/al-foysal-tuhin/Medical-Chatbot.git
 ```
-### STEP 01- Create a conda environment after opening the repository
+
+Move into the project
 
 ```bash
-conda create -n medibot python=3.10 -y
+cd Medical-Chatbot
 ```
+
+Create a virtual environment
 
 ```bash
-conda activate medibot
+python -m venv venv
 ```
 
+Activate it
 
-### STEP 02- install the requirements
+### Windows
+
+```bash
+venv\Scripts\activate
+```
+
+### Linux / macOS
+
+```bash
+source venv/bin/activate
+```
+
+Install dependencies
+
 ```bash
 pip install -r requirements.txt
 ```
 
+---
 
-### Create a `.env` file in the root directory and add your Pinecone & openai credentials as follows:
+# 🔑 Environment Variables
 
-```ini
-PINECONE_API_KEY = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-OPENAI_API_KEY = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+Create a `.env` file in the project root.
+
+```env
+GOOGLE_API_KEY=YOUR_GOOGLE_API_KEY
+PINECONE_API_KEY=YOUR_PINECONE_API_KEY
 ```
 
+---
+
+# 📚 Build the Vector Database
+
+Place your PDF files inside
+
+```
+data/
+```
+
+Then run
 
 ```bash
-# run the following command to store embeddings to pinecone
 python store_index.py
 ```
 
+This will
+
+- Load PDFs
+- Split documents into chunks
+- Generate embeddings
+- Upload vectors to Pinecone
+
+---
+
+# ▶️ Run the Application
+
 ```bash
-# Finally run the following command
 python app.py
 ```
 
-Now,
-```bash
-open up localhost:
+The application will be available at
+
+```
+http://localhost:8080
 ```
 
+---
 
-### Techstack Used:
+# 🌐 Deployment
 
-- Python
-- LangChain
+This project can be deployed on cloud platforms such as
+
+- Render
+- AWS EC2
+- Railway
+- Fly.io
+- Azure App Service
+
+---
+
+# 📷 Application Workflow
+
+```
+PDF Documents
+      │
+      ▼
+Document Loader
+      │
+      ▼
+Text Splitter
+      │
+      ▼
+Embedding Model
+      │
+      ▼
+Pinecone Vector Database
+      │
+      ▼
+Retriever
+      │
+      ▼
+Google Gemini
+      │
+      ▼
+Medical Response
+```
+
+---
+
+# 📦 Main Libraries
+
 - Flask
-- GPT
+- LangChain
+- LangChain Pinecone
+- LangChain Google GenAI
+- Sentence Transformers
 - Pinecone
+- PyPDF
+- Python Dotenv
 
+---
 
+# 💡 Future Improvements
 
-# AWS-CICD-Deployment-with-Github-Actions
+- User authentication
+- Chat history
+- Conversation memory
+- Voice assistant
+- Medical source citations
+- Docker Compose
+- Kubernetes deployment
 
-## 1. Login to AWS console.
+---
 
-## 2. Create IAM user for deployment
+# 👨‍💻 Author
 
-	#with specific access
+**AL Foysal Tuhin**
 
-	1. EC2 access : It is virtual machine
+- GitHub: https://github.com/al-foysal-tuhin
+- LinkedIn: www.linkedin.com/in/alfoysaltuhin
 
-	2. ECR: Elastic Container registry to save your docker image in aws
+---
 
+# ⭐ If you found this project useful
 
-	#Description: About the deployment
+Please consider giving it a ⭐ on GitHub.
 
-	1. Build docker image of the source code
-
-	2. Push your docker image to ECR
-
-	3. Launch Your EC2 
-
-	4. Pull Your image from ECR in EC2
-
-	5. Lauch your docker image in EC2
-
-	#Policy:
-
-	1. AmazonEC2ContainerRegistryFullAccess
-
-	2. AmazonEC2FullAccess
-
-	
-## 3. Create ECR repo to store/save docker image
-    - Save the URI: 191611156517.dkr.ecr.eu-north-1.amazonaws.com/medicalchatbot
-
-	
-## 4. Create EC2 machine (Ubuntu) 
-
-## 5. Open EC2 and Install docker in EC2 Machine:
-	
-	
-	#optinal
-
-	sudo apt-get update -y
-
-	sudo apt-get upgrade
-	
-	#required
-
-	curl -fsSL https://get.docker.com -o get-docker.sh
-
-	sudo sh get-docker.sh
-
-	sudo usermod -aG docker ubuntu
-
-	newgrp docker
-	
-# 6. Configure EC2 as self-hosted runner:
-    setting>actions>runner>new self hosted runner> choose os> then run command one by one
-
-
-# 7. Setup github secrets:
-
-   - AWS_ACCESS_KEY_ID
-   - AWS_SECRET_ACCESS_KEY
-   - AWS_DEFAULT_REGION
-   - ECR_REPO
-   - PINECONE_API_KEY
-   - OPENAI_API_KEY
+It helps others discover the project and supports future development.
