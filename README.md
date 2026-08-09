@@ -10,6 +10,8 @@ The application combines **LangChain**, **Google Gemini**, **Pinecone Vector Dat
 
 👉 **https://medical-chatbot-rag.fly.dev/**
 
+> ⏳ **Note:** Because the application is hosted on Fly.io, the first request after a period of inactivity may take a little longer while the server wakes up and loads the embedding model and RAG pipeline. Subsequent requests should respond much faster.
+
 > ⚠️ **Medical Disclaimer:** This chatbot is intended for educational and informational purposes only. It does not provide medical diagnosis or replace advice from a qualified healthcare professional.
 
 ---
