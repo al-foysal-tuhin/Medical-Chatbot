@@ -18,16 +18,16 @@ The application combines **LangChain**, **Google Gemini**, **Pinecone Vector Dat
 
 ## ✨ Features
 
-* 📄 PDF document ingestion
-* ✂️ Automatic document text splitting and chunking
-* 🧠 Hugging Face sentence-transformer embeddings
-* 🔍 Semantic similarity search
-* 🗄️ Pinecone vector database
-* 🤖 Google Gemini 3.5 Flash for response generation
-* 🔗 LangChain RAG pipeline
-* 🌐 Flask web interface
-* ☁️ Cloud deployment with Fly.io
-* 🔐 Environment-variable based API key management
+- 📄 PDF document ingestion
+- ✂️ Automatic document text splitting and chunking
+- 🧠 Hugging Face Sentence Transformer embeddings
+- 🔍 Semantic similarity search
+- 🗄️ Pinecone vector database
+- 🤖 Google Gemini for response generation
+- 🔗 LangChain RAG pipeline
+- 🌐 Flask web interface
+- ☁️ Cloud deployment with Fly.io
+- 🔐 Environment-variable based API key management
 
 ---
 
@@ -35,85 +35,86 @@ The application combines **LangChain**, **Google Gemini**, **Pinecone Vector Dat
 
 The chatbot follows a Retrieval-Augmented Generation architecture:
 
-```text
-                 Medical PDF Documents
-                          │
-                          ▼
-                  Document Loader
-                          │
-                          ▼
-                   Text Splitter
-                          │
-                          ▼
-              Hugging Face Embeddings
-                          │
-                          ▼
-                Pinecone Vector DB
-                          │
-                          ▼
-                      Retriever
-                          │
-                    User Question
-                          │
-                          ▼
-                Relevant Documents
-                          │
-                          ▼
-                 Google Gemini 3.5
-                          │
-                          ▼
-                  Generated Answer
-                          │
-                          ▼
-                    Flask Web UI
-```
+    Medical PDF Documents
+             │
+             ▼
+      Document Loader
+             │
+             ▼
+       Text Splitter
+             │
+             ▼
+    Hugging Face Embeddings
+             │
+             ▼
+      Pinecone Vector DB
+             │
+             ▼
+          Retriever
+             │
+       User Question
+             │
+             ▼
+     Relevant Documents
+             │
+             ▼
+      Context + Question
+             │
+             ▼
+       Google Gemini
+             │
+             ▼
+       Generated Answer
+             │
+             ▼
+         Flask Web UI
 
 ---
 
 ## 🛠️ Tech Stack
 
-| Technology        | Purpose                         |
-| ----------------- | ------------------------------- |
-| **Python**        | Core programming language       |
-| **Flask**         | Web application framework       |
-| **LangChain**     | RAG pipeline orchestration      |
-| **Google Gemini** | Large Language Model            |
-| **Pinecone**      | Vector database                 |
-| **Hugging Face**  | Text embeddings                 |
-| **PyPDF**         | PDF document processing         |
+| Technology | Purpose |
+|---|---|
+| **Python** | Core programming language |
+| **Flask** | Web application framework |
+| **LangChain** | RAG pipeline orchestration |
+| **Google Gemini** | Large Language Model |
+| **Pinecone** | Vector database |
+| **Hugging Face** | Text embedding generation |
+| **Sentence Transformers** | Semantic text embeddings |
+| **PyPDF** | PDF document processing |
 | **python-dotenv** | Environment variable management |
-| **HTML/CSS**      | Frontend                        |
-| **Fly.io**        | Cloud deployment                |
+| **HTML/CSS** | Frontend |
+| **Fly.io** | Cloud deployment |
 
 ---
 
 ## 📂 Project Structure
 
-```text
-Medical-Chatbot/
-│
-├── app.py
-├── store_index.py
-├── requirements.txt
-├── setup.py
-├── Dockerfile
-│
-├── data/
-│   └── Medical PDFs
-│
-├── src/
-│   ├── helper.py
-│   └── prompt.py
-│
-├── static/
-│   ├── style.css
-│   └── Untitled-design.png
-│
-├── templates/
-│   └── chat.html
-│
-└── README.md
-```
+    Medical-Chatbot/
+    │
+    ├── app.py
+    ├── store_index.py
+    ├── requirements.txt
+    ├── setup.py
+    ├── Dockerfile
+    ├── fly.toml
+    │
+    ├── data/
+    │   └── Medical PDFs
+    │
+    ├── src/
+    │   ├── helper.py
+    │   └── prompt.py
+    │
+    ├── static/
+    │   ├── style.css
+    │   └── Untitled-design.png
+    │
+    ├── templates/
+    │   └── chat.html
+    │
+    └── README.md
 
 ---
 
@@ -121,42 +122,30 @@ Medical-Chatbot/
 
 ## 1. Clone the Repository
 
-```bash
-git clone https://github.com/al-foysal-tuhin/Medical-Chatbot.git
-```
+    git clone https://github.com/al-foysal-tuhin/Medical-Chatbot.git
 
 ## 2. Move into the Project Directory
 
-```bash
-cd Medical-Chatbot
-```
+    cd Medical-Chatbot
 
 ## 3. Create a Virtual Environment
 
 ### Windows
 
-```bash
-python -m venv venv
-```
+    python -m venv venv
 
 Activate it:
 
-```bash
-venv\Scripts\activate
-```
+    venv\Scripts\activate
 
 ### Linux / macOS
 
-```bash
-python -m venv venv
-source venv/bin/activate
-```
+    python -m venv venv
+    source venv/bin/activate
 
 ## 4. Install Dependencies
 
-```bash
-pip install -r requirements.txt
-```
+    pip install -r requirements.txt
 
 ---
 
@@ -164,10 +153,8 @@ pip install -r requirements.txt
 
 Create a `.env` file in the project root:
 
-```env
-GOOGLE_API_KEY=YOUR_GOOGLE_API_KEY
-PINECONE_API_KEY=YOUR_PINECONE_API_KEY
-```
+    GOOGLE_API_KEY=YOUR_GOOGLE_API_KEY
+    PINECONE_API_KEY=YOUR_PINECONE_API_KEY
 
 ### Important
 
@@ -175,12 +162,10 @@ Never commit your `.env` file or API keys to GitHub.
 
 Make sure `.env` is included in your `.gitignore`:
 
-```text
-.env
-venv/
-__pycache__/
-*.pyc
-```
+    .env
+    venv/
+    __pycache__/
+    *.pyc
 
 ---
 
@@ -188,15 +173,11 @@ __pycache__/
 
 Place your medical PDF documents inside:
 
-```text
-data/
-```
+    data/
 
 Then run:
 
-```bash
-python store_index.py
-```
+    python store_index.py
 
 The process will:
 
@@ -212,25 +193,19 @@ The process will:
 
 Start the Flask application:
 
-```bash
-python app.py
-```
+    python app.py
 
 The application will run at:
 
-```text
-http://localhost:8080
-```
+    http://localhost:8080
 
 Open the URL in your browser and start asking questions.
 
 Example:
 
-```text
-What is acne?
-```
+    What is acne?
 
-The RAG pipeline retrieves relevant information from the medical knowledge base and sends the context to Gemini to generate the answer.
+The RAG pipeline retrieves relevant information from the medical knowledge base and sends the retrieved context to Gemini to generate the answer.
 
 ---
 
@@ -240,18 +215,20 @@ The application is deployed using **Fly.io**.
 
 ### Production URL
 
-```text
-https://medical-chatbot-rag.fly.dev/
-```
+    https://medical-chatbot-rag.fly.dev/
 
 The deployment uses environment variables for sensitive credentials such as:
 
-```text
-GOOGLE_API_KEY
-PINECONE_API_KEY
-```
+    GOOGLE_API_KEY
+    PINECONE_API_KEY
 
 This allows the application to run securely without exposing API credentials in the source code.
+
+### Deployment Command
+
+    fly deploy
+
+The application runs inside a Docker container and listens on port `8080`.
 
 ---
 
@@ -269,7 +246,7 @@ Large documents are divided into smaller chunks so they can be efficiently searc
 
 ### 3. Embedding Generation
 
-Each text chunk is converted into a numerical vector using a Hugging Face embedding model.
+Each text chunk is converted into a numerical vector using a Hugging Face Sentence Transformer model.
 
 ### 4. Vector Storage
 
@@ -289,7 +266,7 @@ The retrieved information is combined with the user's question.
 
 ### 8. Gemini Generation
 
-Google Gemini 3.5 Flash generates the final response using the retrieved context.
+Google Gemini generates the final response using the retrieved context.
 
 ---
 
@@ -297,41 +274,45 @@ Google Gemini 3.5 Flash generates the final response using the retrieved context
 
 ### User
 
-```text
-What is acne?
-```
+    What is a BUN test?
 
 ### RAG Pipeline
 
-```text
-User Question
-     ↓
-Pinecone Similarity Search
-     ↓
-Relevant Medical Documents
-     ↓
-LangChain Retriever
-     ↓
-Gemini 3.5 Flash
-     ↓
-Medical Explanation
-```
+    User Question
+         ↓
+    Pinecone Similarity Search
+         ↓
+    Relevant Medical Documents
+         ↓
+    LangChain Retriever
+         ↓
+    Retrieved Context
+         ↓
+    Google Gemini
+         ↓
+    Medical Explanation
+
+The deployed application successfully processes questions through the complete RAG pipeline, including embedding loading, Pinecone retrieval, and Gemini response generation.
 
 ---
 
 # 📦 Main Python Libraries
 
-```text
-Flask
-LangChain
-LangChain Pinecone
-LangChain Google GenAI
-Google GenAI
-Sentence Transformers
-Pinecone
-PyPDF
-Python Dotenv
-```
+    langchain
+    langchain-core
+    langchain-community
+    langchain-pinecone
+    langchain-google-genai
+    langchain-huggingface
+    google-genai
+    flask
+    sentence-transformers
+    pypdf
+    python-dotenv
+
+Exact versions are maintained in:
+
+    requirements.txt
 
 ---
 
@@ -343,10 +324,12 @@ Sensitive credentials should **never** be committed to GitHub.
 
 Example:
 
-```env
-GOOGLE_API_KEY=********
-PINECONE_API_KEY=********
-```
+    GOOGLE_API_KEY=********
+    PINECONE_API_KEY=********
+
+For local development, use a `.env` file.
+
+For production deployment, configure secrets through the deployment platform rather than storing them in the repository.
 
 ---
 
@@ -354,17 +337,17 @@ PINECONE_API_KEY=********
 
 Some planned improvements include:
 
-* 👤 User authentication
-* 💬 Conversation history
-* 🧠 Persistent chat memory
-* 🎙️ Voice-based interaction
-* 📚 Medical source citations
-* 🩺 Improved medical-domain prompting
-* 🐳 Docker Compose
-* ☸️ Kubernetes deployment
-* 📊 User analytics
-* 🔎 Improved retrieval and reranking
-* 🧪 Automated evaluation of RAG responses
+- 👤 User authentication
+- 💬 Conversation history
+- 🧠 Persistent chat memory
+- 🎙️ Voice-based interaction
+- 📚 Medical source citations
+- 🩺 Improved medical-domain prompting
+- 🔎 Improved retrieval and reranking
+- 📊 RAG evaluation and performance metrics
+- 🧪 Automated evaluation of RAG responses
+- 🐳 Improved containerization and production deployment
+- ☸️ Kubernetes deployment
 
 ---
 
@@ -397,4 +380,3 @@ This application is an educational demonstration of Retrieval-Augmented Generati
 The responses generated by the chatbot may contain inaccuracies and should **not** be considered professional medical advice, diagnosis, or treatment recommendations.
 
 Always consult a qualified healthcare professional for medical concerns.
-
